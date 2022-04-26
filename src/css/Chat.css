@@ -1,0 +1,115 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 0.75;
+}
+.chat_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(114, 105, 105);
+  height: 50px;
+  border-bottom: 1px solid black;
+}
+.chat_header_left {
+  display: flex;
+  align-items: center;
+}
+.chat_header_left > .chat_header_left_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.chat_header_right {
+  display: flex;
+  align-items: center;
+  justify-content: 10px;
+}
+.chat_header_right > .MuiSvgIcon-root {
+  cursor: pointer;
+  padding-right: 15px;
+  margin-left: 10px;
+}
+.chat_body {
+  flex: 1;
+  background-position: cover;
+  background-repeat: repeat;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.chat_body::-webkit-scrollbar {
+  display: none;
+}
+.chat_message {
+  position: relative;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  font-size: 16px;
+  max-width: 500px;
+}
+.chat_timestamp {
+  margin-left: 10px;
+  font-size: xx-small;
+}
+.chat_name {
+  position: absolute;
+  font-size: xx-small;
+  font-weight: 800;
+  top: -15px;
+  left: 5px;
+  width: fit-content;
+  color: white;
+}
+.chat_sender {
+  justify-content: right;
+  margin-left: auto;
+  background-color: turquoise;
+}
+.chat_footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+  background-color: rgb(226, 171, 103);
+}
+.chat_footer > form {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+.chat_footer > form > input {
+  height: 35px;
+  flex: 1;
+  border-radius: 20px;
+  padding: 0px 20px;
+  margin: 0px 20px;
+  outline: none;
+  border: none;
+}
+.chat_footer > form > button {
+  margin-right: 15px;
+  border-radius: 5px;
+  height: 30px;
+  width: 50px;
+  cursor: pointer;
+}
+.chat_footer > .MuiSvgIcon-root {
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+/* new login added */
+@media only screen and (max-width: 500px) {
+  .chat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}

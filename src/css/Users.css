@@ -1,0 +1,29 @@
+.user_body {
+  cursor: pointer;
+  margin-right: 5px;
+}
+.user_body:hover {
+  background-color: rgb(211, 198, 198);
+}
+.user_row {
+  display: flex;
+  border-bottom: 1px solid rgb(207, 195, 195);
+  padding: 10px 5px;
+  margin-right: 2px;
+}
+.user_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.user_last_message {
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

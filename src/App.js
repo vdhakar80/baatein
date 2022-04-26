@@ -1,25 +1,80 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Sidebar from "./components/Sidebar";
+import Chat from "./components/Chat";
+import { Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Login from "./components/Login";
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
+  const [user, setUser] = useState(null);
+  if (props?.user?.email) {
+    sessionStorage.setItem("email", props?.user?.email);
+    sessionStorage.setItem("name", props?.user?.name);
+    sessionStorage.setItem("picture", props?.user?.picture);
+    sessionStorage.setItem("id", props?.user?.id);
+  }
+  const [screenSize, getDimension] = useState({
+    dynamicWidth: window.innerWidth,
+    dynamicHeight: window.innerHeight,
+  });
+
+  const setDimension = () => {
+    getDimension({
+      dynamicWidth: window.innerWidth,
+      dynamicHeight: window.innerHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", setDimension);
+
+    return () => {
+      window.removeEventListener("resize", setDimension);
+    };
+  }, [screenSize]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!(sessionStorage.getItem("email") && sessionStorage.getItem("name")) ? (
+        <Login />
+      ) : (
+        <div className="App">
+          <div className="app_body">
+            {screenSize?.dynamicWidth > 500 && (
+              <>
+                <Sidebar />
+                <Switch>
+                  <Route path="/rooms/:roomId">
+                    <Chat />
+                  </Route>
+                  <Route path="/">
+                    <Chat />
+                  </Route>
+                </Switch>
+              </>
+            )}
+            {screenSize?.dynamicWidth <= 500 && (
+              <>
+                <Switch>
+                  <Route path="/rooms/:roomId">
+                    <Chat />
+                  </Route>
+                  <Route path="/">
+                    <Sidebar />
+                  </Route>
+                </Switch>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+  };
+};
+export default connect(mapStateToProps, null)(App);
